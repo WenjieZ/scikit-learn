@@ -1592,3 +1592,10 @@ def test_bug():
     indices = SubBugClass._BugClass__masks_to_indices(
         [[False, True, True, False, True], [False, False], [True]])
     assert_array_equal(next(indices), [1, 2, 4])
+
+
+def test_bug2():
+    idx = np.arange(10)
+    mask = [False] + [True] * 4 + [False] * 4 + [True]
+    assert_array_equal(idx[mask], [1, 2, 3, 4, 9])
+    assert 1==2
