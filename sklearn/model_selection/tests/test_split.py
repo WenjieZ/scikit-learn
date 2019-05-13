@@ -1568,34 +1568,7 @@ def test_leave_p_out_empty_trainset():
         next(cv.split(X, y, groups=[1, 2]))
 
 
-def test_bug2():
+def test_bug():
     idx = np.arange(10)
     mask = [False] + [True] * 4 + [False] * 4 + [True]
     assert_array_equal(idx[mask], [1, 2, 3, 4, 9])
-
-
-from abc import ABCMeta, abstractmethod
-
-
-class BugClass(metaclass=ABCMeta):
-    @staticmethod
-    def __masks_to_indices(masks):
-        for mask in masks:
-            index = np.arange(len(mask))
-            yield index[mask]
-
-    @abstractmethod
-    def dummy():
-        pass
-
-
-class SubBugClass(BugClass):
-    def dummy():
-        return 1
-
-
-def test_bug():
-    indices = SubBugClass._BugClass__masks_to_indices(
-        [[False, True, True, False, True], [False, False], [True]])
-    assert_array_equal(next(indices), [1, 2, 4])
-    assert 1==2
