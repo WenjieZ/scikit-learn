@@ -1568,16 +1568,24 @@ def test_leave_p_out_empty_trainset():
         next(cv.split(X, y, groups=[1, 2]))
 
 
-class BugClass():
+from abc import ABCMeta, abstractmethod
+
+
+class BugClass(metaclass=ABCMeta):
     @staticmethod
     def __masks_to_indices(masks):
         for mask in masks:
             index = np.arange(len(mask))
             yield index[mask]
 
+    @abstractmethod
+    def dummy():
+        pass
+
 
 class SubBugClass():
-    pass
+    def dummy():
+        return 1
 
 
 def bug_test():
