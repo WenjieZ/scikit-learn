@@ -1566,3 +1566,9 @@ def test_leave_p_out_empty_trainset():
             ValueError,
             match='p=2 must be strictly less than the number of samples=2'):
         next(cv.split(X, y, groups=[1, 2]))
+
+
+def buggy():
+    dx = np.arange(10)
+    mask = np.array([False] + [True] * 4 + [False] * 4 + [True])
+    assert_array_equal(idx[mask], array([1, 2, 3, 4, 9]))
