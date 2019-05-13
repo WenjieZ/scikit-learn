@@ -1570,7 +1570,7 @@ def test_leave_p_out_empty_trainset():
 
 def buggy():
     dx = np.arange(10)
-    mask = np.array([False] + [True] * 4 + [False] * 4 + [True])
+    mask = [False] + [True] * 4 + [False] * 4 + [True]
     assert_array_equal(idx[mask], array([1, 2, 3, 4, 9]))
 
 
@@ -1581,6 +1581,5 @@ class Bug():
 
 def buggy_1():
     dx = np.arange(10)
-    mask = np.array([False] + [True] * 4 + [False] * 4 + [True])
+    mask = [False] + [True] * 4 + [False] * 4 + [True]
     assert_array_equal(Bug._Bug__bug(idx, mask), array([1, 2, 3, 4, 9]))
-    
