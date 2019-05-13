@@ -1576,7 +1576,11 @@ class BugClass():
             yield index[mask]
 
 
+class SubBugClass():
+    pass
+
+
 def bug_test():
-    indices = BugClass._BugClass__masks_to_indices(
+    indices = SubBugClass._BugClass__masks_to_indices(
         [[False, True, True, False, True], [False, False], [True]])
     assert_array_equal(next(indices), [1, 2, 4])
