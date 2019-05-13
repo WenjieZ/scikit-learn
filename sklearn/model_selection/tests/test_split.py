@@ -1572,3 +1572,15 @@ def buggy():
     dx = np.arange(10)
     mask = np.array([False] + [True] * 4 + [False] * 4 + [True])
     assert_array_equal(idx[mask], array([1, 2, 3, 4, 9]))
+
+
+class Bug():
+    @staticmethod
+    def __bug(a, b):
+        return(a[b])
+
+def buggy_1():
+    dx = np.arange(10)
+    mask = np.array([False] + [True] * 4 + [False] * 4 + [True])
+    assert_array_equal(Bug._Bug__bug(idx, mask), array([1, 2, 3, 4, 9]))
+    
