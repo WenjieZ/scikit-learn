@@ -1583,12 +1583,12 @@ class BugClass(metaclass=ABCMeta):
         pass
 
 
-class SubBugClass():
+class SubBugClass(BugClass):
     def dummy():
         return 1
 
 
-def bug_test():
+def test_bug():
     indices = SubBugClass._BugClass__masks_to_indices(
         [[False, True, True, False, True], [False, False], [True]])
     assert_array_equal(next(indices), [1, 2, 4])
