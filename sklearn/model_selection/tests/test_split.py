@@ -1568,18 +1568,15 @@ def test_leave_p_out_empty_trainset():
         next(cv.split(X, y, groups=[1, 2]))
 
 
-def buggy():
-    dx = np.arange(10)
-    mask = [False] + [True] * 4 + [False] * 4 + [True]
-    assert_array_equal(idx[mask], array([1, 2, 3, 4, 9]))
-
-
-class Bug():
+class BugClass():
     @staticmethod
-    def __bug(a, b):
-        return(a[b])
+    def __masks_to_indices(masks):
+        for mask in masks:
+            index = np.arange(len(mask))
+            yield index[mask]
 
-def buggy_1():
-    dx = np.arange(10)
-    mask = [False] + [True] * 4 + [False] * 4 + [True]
-    assert_array_equal(Bug._Bug__bug(idx, mask), array([1, 2, 3, 4, 9]))
+
+def bug_test():
+    indices = BugClass._BugClass__masks_to_indices(
+        [[False, True, True, False, True], [False, False], [True]])
+    assert_array_equal(next(indices), [1, 2, 4])
